@@ -1,14 +1,17 @@
 package com.test.thecocktaildb.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import com.test.thecocktaildb.R
 import com.test.thecocktaildb.databinding.FragmentDrinksBinding
+import com.test.thecocktaildb.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,6 +20,7 @@ class DrinkFragment : Fragment() {
     private val viewModel by viewModels<DrinkViewModel>()
     private var _binding: FragmentDrinksBinding? = null
     private val binding get() = _binding!!
+    private lateinit var adapter: CockTailAdapter
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -24,7 +28,7 @@ class DrinkFragment : Fragment() {
 
         _binding = FragmentDrinksBinding.bind(view)
 
-        val adapter = CockTailAdapter()
+        adapter = CockTailAdapter()
 
         binding.apply {
             recyclerView.setHasFixedSize(true)
@@ -66,7 +70,6 @@ class DrinkFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-
         inflater.inflate(R.menu.menu_drink, menu)
 
         val searchItem = menu.findItem(R.id.action_search)
@@ -74,7 +77,6 @@ class DrinkFragment : Fragment() {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-
                 if (query != null) {
                     binding.recyclerView.scrollToPosition(0)
                     viewModel.searchCockTail(query)
@@ -87,7 +89,36 @@ class DrinkFragment : Fragment() {
                 return true
             }
         })
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.category -> {
+                viewModel.queryCategory.observe(viewLifecycleOwner) {
+                    adapter.submitData(viewLifecycleOwner.lifecycle, PagingData.empty())
+                    adapter.submitData(viewLifecycleOwner.lifecycle, it)
+                }
+
+                return true
+            }
+            R.id.glass -> {
+                viewModel.queryGlass.observe(viewLifecycleOwner) {
+                    adapter.submitData(viewLifecycleOwner.lifecycle, PagingData.empty())
+                    adapter.submitData(viewLifecycleOwner.lifecycle, it)
+
+                }
+                return true
+            }
+            R.id.alcoholic -> {
+                viewModel.queryAlcoholic.observe(viewLifecycleOwner) {
+                    adapter.submitData(viewLifecycleOwner.lifecycle, PagingData.empty())
+                    adapter.submitData(viewLifecycleOwner.lifecycle, it)
+
+                }
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onCreateView(

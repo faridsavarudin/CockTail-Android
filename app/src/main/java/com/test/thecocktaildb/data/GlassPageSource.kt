@@ -8,7 +8,7 @@ import java.io.IOException
 
 private const val PAGE = 1
 
-class DrinkPageSource(
+class GlassPageSource(
     private val drinkApi: DrinkApi,
     private val query: String
 ) : PagingSource<Int, DrinksItem>() {
@@ -18,7 +18,7 @@ class DrinkPageSource(
         val position = params.key ?: PAGE
 
         return try {
-            val response = drinkApi.searchCockTail(query, position, params.loadSize)
+            val response = drinkApi.filterByGlass(query, position, params.loadSize)
             val photos = response.drinks
 
             LoadResult.Page(

@@ -1,5 +1,6 @@
 package com.test.thecocktaildb.data
 
+import android.util.Log
 import androidx.paging.PagingSource
 import com.test.thecocktaildb.DrinksItem
 import com.test.thecocktaildb.api.DrinkApi
@@ -8,7 +9,7 @@ import java.io.IOException
 
 private const val PAGE = 1
 
-class DrinkPageSource(
+class CategoryPageSource(
     private val drinkApi: DrinkApi,
     private val query: String
 ) : PagingSource<Int, DrinksItem>() {
@@ -18,7 +19,7 @@ class DrinkPageSource(
         val position = params.key ?: PAGE
 
         return try {
-            val response = drinkApi.searchCockTail(query, position, params.loadSize)
+            val response = drinkApi.filterByCategory(query, position, params.loadSize)
             val photos = response.drinks
 
             LoadResult.Page(

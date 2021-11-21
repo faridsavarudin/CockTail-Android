@@ -11,9 +11,32 @@ interface DrinkApi {
     }
 
     @GET("search.php")
-    suspend fun searchPhotos(
+    suspend fun searchCockTail(
         @Query("s") query: String,
         @Query("page") page: Int,
         @Query("per_page") perPage: Int
     ): DrinksListResponse
+
+    @GET("filter.php")
+    suspend fun filterByAlcohol(
+        @Query("a") query: String,
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int
+    ): DrinksListResponse
+
+    @GET("filter.php")
+    suspend fun filterByGlass(
+        @Query("g") query: String,
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int
+    ): DrinksListResponse
+
+    @GET("filter.php")
+    suspend fun filterByCategory(
+        @Query("c") query: String,
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int
+    ): DrinksListResponse
 }
+
+

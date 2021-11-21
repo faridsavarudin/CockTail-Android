@@ -50,4 +50,6 @@ ext {
     retrofitVersion = '2.9.0'
     okhttpVersion = '4.9.1'
     testExtJunitVersion = '1.1.1'
+    espressoVersion = "3.3.0"
+    idleResourceVersion = '3.3.0'
 }

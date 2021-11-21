@@ -9,4 +9,21 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView" />
 
+    <item
+        android:id="@+id/alcoholic"
+        app:showAsAction="never"
+        android:title="Alcoholic">
+    </item>
+
+    <item
+        android:id="@+id/category"
+        app:showAsAction="never"
+        android:title="Category">
+    </item>
+    <item
+        android:id="@+id/glass"
+        app:showAsAction="never"
+        android:title="Glass">
+    </item>
+
 </menu>
