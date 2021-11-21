@@ -12,8 +12,8 @@ class DrinkRepository @Inject constructor(private val drinkApi: DrinkApi) {
     fun getSearchResults(query: String) =
         Pager(
             config = PagingConfig(
-                pageSize = 20,
-                maxSize = 100,
+                pageSize = 10,
+                maxSize = 50,
                 enablePlaceholders = false
             ),
             pagingSourceFactory = { DrinkPageSource(drinkApi, query) }
