@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DrinksListResponse(
-	val drinks: List<DrinksItem?>? = null
+	val drinks: List<DrinksItem>
 ) : Parcelable
 
 @Parcelize
