@@ -16,5 +16,13 @@ data class DrinksItem(
 
 	val strDrinkThumb: String?,
 
-	val idDrink: String?
+	val strInstructions: String?,
+
+	val strGlass: String?,
+
+	val strCategory: String?,
+
+	val strAlcoholic: String?,
+
+	val idDrink: String
 ) : Parcelable

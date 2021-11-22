@@ -37,6 +37,12 @@ interface DrinkApi {
         @Query("page") page: Int,
         @Query("per_page") perPage: Int
     ): DrinksListResponse
+
+    @GET("lookup.php")
+    suspend fun detailCockTail(
+        @Query("i") query: String
+    ): DrinksListResponse
+
 }
 
 

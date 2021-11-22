@@ -56,4 +56,15 @@ class DrinkRepository @Inject constructor(private val drinkApi: DrinkApi) {
             pagingSourceFactory = { GlassPageSource(drinkApi, query) }
         ).liveData
 
+    fun detailCockTail(id: String) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        EspressoIdlingResource.increment()
+        try {
+            emit(Resource.success(data = drinkApi.detailCockTail(id)))
+            EspressoIdlingResource.decrement()
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            EspressoIdlingResource.decrement()
+        }
+    }
 }

@@ -11,7 +11,7 @@ import com.test.thecocktaildb.DrinksItem
 import com.test.thecocktaildb.R
 import com.test.thecocktaildb.databinding.ItemDrinkBinding
 
-class CockTailAdapter :
+class CockTailAdapter(private val listener: OnItemClickListener) :
     PagingDataAdapter<DrinksItem, CockTailAdapter.PhotoViewHolder>(PHOTO_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
@@ -29,8 +29,20 @@ class CockTailAdapter :
         }
     }
 
-    class PhotoViewHolder(private val binding: ItemDrinkBinding) :
+    inner class PhotoViewHolder(private val binding: ItemDrinkBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val item = getItem(position)
+                    if (item != null) {
+                        listener.onItemClick(item)
+                    }
+                }
+            }
+        }
 
         fun bind(item: DrinksItem) {
             binding.apply {
@@ -45,6 +57,11 @@ class CockTailAdapter :
             }
         }
     }
+
+    interface OnItemClickListener {
+        fun onItemClick(drinksItem: DrinksItem)
+    }
+
 
     companion object {
         private val PHOTO_COMPARATOR = object : DiffUtil.ItemCallback<DrinksItem>() {

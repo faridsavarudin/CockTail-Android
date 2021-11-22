@@ -5,4 +5,8 @@
     <string name="results_could_not_be_loaded">Results could not be loaded</string>
     <string name="retry">Retry</string>
     <string name="search">Search</string>
+    <string name="instructions">Instructions</string>
+    <string name="details">Details</string>
+    <string name="category">Category</string>
+    <string name="glass">Glass</string>
 </resources>
