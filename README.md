@@ -1,8 +1,8 @@
-# WLB Android Test
-This app for Test in WLB as Android Developer
+# CockTail Android
 
 ## Description
-This app is the result of my assessment in WLB, implements MVVM(Model View ViewModel) architecture using the components ViewModel, LiveData, Hilt, Retrofit, OkHttp,
+This is an android app for cocktail lovers. It shows recipes for both Alcoholic and Non-Alcoholic drinks,
+ implements MVVM(Model View ViewModel) architecture using the components ViewModel, LiveData, Hilt, Retrofit, OkHttp,
  Paging3 etc. </br>
 
 This app for to make simple android application, using free [CockTailDB API](https://www.thecocktaildb.com/api.php).
